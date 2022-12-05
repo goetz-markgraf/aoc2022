@@ -3,11 +3,11 @@ import { drop, find, findIndex, identity, map, pipe, splitAt, sumBy, take } from
 const deltaLowercase = "a".charCodeAt(0) - 1 //?
 const deltaUppercase = "A".charCodeAt(0) - 27 //?
 
-function findPackage(rucksack: string) {
+function findPackage(rucksack: string): string {
     const compartments = splitAt(rucksack.split(''), rucksack.length / 2)
     return find(compartments[0], item1 =>
         findIndex(compartments[1], item2 => item1 === item2) >= 0
-    )
+    )!
 }
 
 const calculatePriority = (item: string) =>
@@ -25,7 +25,7 @@ export const day31 = (input: string[]) =>
 
 
 const makeGroupsOfThree = (lines: string[]): string[][] => {
-    const ret = []
+    const ret: string[][] = []
     while (lines.length > 0) {
         ret.push(take(lines, 3))
         lines = drop(lines, 3)
@@ -33,11 +33,11 @@ const makeGroupsOfThree = (lines: string[]): string[][] => {
     return ret
 }
 
-const findGroupPackage = (group: string[]) =>
+const findGroupPackage = (group: string[]): string =>
     find(group[0].split(''), item1 =>
         findIndex(group[1].split(''), item2 => item1 === item2) >= 0 &&
         findIndex(group[2].split(''), item3 => item1 === item3) >= 0
-    )
+    )!
 
 export const day32 = (input: string[]) =>
     pipe(

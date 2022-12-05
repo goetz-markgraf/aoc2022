@@ -1,8 +1,8 @@
 import { add, sortDesc } from "./util";
 
 const splitAllByEmptyString = (array: string[]): string[][] => {
-    const ret = []
-    let current = []
+    const ret: string[][] = []
+    let current: string[]= []
     array.forEach(item => {
         if (item === "") {
             ret.push(current)
