@@ -27,7 +27,7 @@ const testInput = [
     "7214296 k"
 ]
 
-describe('part 1', () => {
+describe.skip('part 1', () => {
     it("should return 95437", () => {
         const result = day71(testInput)
         expect(result).toEqual(95437)
@@ -39,7 +39,7 @@ describe('part 1', () => {
     });
 });
 
-describe('part 2', () => {
+describe.skip('part 2', () => {
     it("should return 24933642", () => {
         const result = day72(testInput)
         expect(result).toEqual(24933642)

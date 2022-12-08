@@ -10,7 +10,7 @@ const testInput = [
     "CrZsJsPPZsGzwwsLwLmpwMDw"
 ]
 
-describe('day 3 1', () => {
+describe.skip('day 3 1', () => {
     it("should return 157", () => {
         const result = day31(testInput)
         expect(result).toEqual(157)
@@ -23,7 +23,7 @@ describe('day 3 1', () => {
     });
 });
 
-describe('day 3 2', () => {
+describe.skip('day 3 2', () => {
     it("should return 70", () => {
         const result = day32(testInput)
         expect(result).toEqual(70)
