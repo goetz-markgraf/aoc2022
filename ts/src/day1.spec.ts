@@ -1,5 +1,5 @@
 import { day11, day12 } from "./day1";
-import { readText } from "./util";
+import { readLines } from "./util";
 
 const testInput = [
     "1000",
@@ -25,7 +25,7 @@ describe.skip('day 1 1', () => {
     });
 
     it("should run the real task", () => {
-        const lines = readText("day1.input")
+        const lines = readLines("day1.input")
         const result = day11(lines)
         expect(result).toEqual(70369)
     });
@@ -38,7 +38,7 @@ describe.skip('day 1 2', () => {
     });
 
     it("should run the real task", () => {
-        const lines = readText("day1.input")
+        const lines = readLines("day1.input")
         const result = day12(lines)
         expect(result).toEqual(203002)
     });

@@ -1,5 +1,5 @@
 import { calcSenicScore, day81, day82, toField } from "./day8";
-import { readText } from "./util";
+import { readLines } from "./util";
 
 const testInput = [
     "30373",
@@ -15,7 +15,7 @@ describe.skip('part 1', () => {
         expect(result).toEqual(21)
     });
     it("should do the real thing", () => {
-        const input = readText("day8.input")
+        const input = readLines("day8.input")
         const result = day81(input)
         expect(result).toEqual(1829)
     });
@@ -32,7 +32,7 @@ describe.skip('part 2', () => {
         expect(result).toEqual(8)
     });
     it("should do the real thing", () => {
-        const input = readText("day8.input")
+        const input = readLines("day8.input")
         const result = day82(input)
         expect(result).toEqual(291840)
     });

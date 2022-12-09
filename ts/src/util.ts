@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-export const readText = (filename: string) => {
+export const readLines = (filename: string) => {
     const pathName = "../input/" + filename
 
     const content = fs.readFileSync(pathName).toString("utf-8")

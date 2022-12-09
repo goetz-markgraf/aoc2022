@@ -1,5 +1,5 @@
 import { day41, day42 } from "./day4";
-import { readText } from "./util";
+import { readLines } from "./util";
 
 const testInput = [
     "2-4,6-8",
@@ -17,7 +17,7 @@ describe.skip('day 4 1', () => {
     });
 
     it("should do the real thing", () => {
-        const input = readText("day4.input")
+        const input = readLines("day4.input")
         const result = day41(input)
         expect(result).toEqual(494)
     });
@@ -30,7 +30,7 @@ describe.skip('day 4 2', () => {
     });
 
     it("should do the real thing", () => {
-        const input = readText("day4.input")
+        const input = readLines("day4.input")
         const result = day42(input)
         expect(result).toEqual(833)
     });

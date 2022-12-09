@@ -1,5 +1,5 @@
 import { day61, day62 } from "./day6";
-import { readText } from "./util";
+import { readLines } from "./util";
 
 describe.skip('part 1', () => {
     it("should master the examples", () => {
@@ -10,7 +10,7 @@ describe.skip('part 1', () => {
         expect(day61("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw")).toEqual(11)
     });
     it("should do the real thing", () => {
-        const lines = readText("day6.input")
+        const lines = readLines("day6.input")
         expect(day61(lines[0])).toEqual(1155)
     });
 });
@@ -24,7 +24,7 @@ describe.skip('part 2', () => {
         expect(day62("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw")).toEqual(26)
     });
     it("should do the real thing", () => {
-        const lines = readText("day6.input")
+        const lines = readLines("day6.input")
         expect(day62(lines[0])).toEqual(2789)
     });
 });

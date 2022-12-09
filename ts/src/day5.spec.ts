@@ -1,5 +1,5 @@
 import { day51, day52 } from "./day5";
-import { readText } from "./util";
+import { readLines } from "./util";
 
 const testInput = [
     "    [D]",
@@ -19,7 +19,7 @@ describe.skip('part 1', () => {
         expect(result).toEqual("CMZ")
     });
     it("should do the real thing", () => {
-        const input = readText("day5.input")
+        const input = readLines("day5.input")
         const result = day51(input)
         expect(result).toEqual("LBLVVTVLP")
     });
@@ -31,7 +31,7 @@ describe.skip('part 2', () => {
         expect(result).toEqual("MCD")
     });
     it("should do the real thing", () => {
-        const input = readText("day5.input")
+        const input = readLines("day5.input")
         const result = day52(input)
         expect(result).toEqual("TPFFBDRJD")
     });

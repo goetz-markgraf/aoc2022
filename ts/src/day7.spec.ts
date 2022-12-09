@@ -1,5 +1,5 @@
 import { day71, day72 } from "./day7";
-import { readText } from "./util";
+import { readLines } from "./util";
 
 const testInput = [
     "$ cd /",
@@ -33,7 +33,7 @@ describe.skip('part 1', () => {
         expect(result).toEqual(95437)
     });
     it("should do the real thing", () => {
-        const input = readText("day7.input")
+        const input = readLines("day7.input")
         const result = day71(input)
         expect(result).toEqual(1348005)
     });
@@ -45,7 +45,7 @@ describe.skip('part 2', () => {
         expect(result).toEqual(24933642)
     });
     it("should do the real thing", () => {
-        const input = readText("day7.input")
+        const input = readLines("day7.input")
         const result = day72(input)
         expect(result).toEqual(12785886)
     });
