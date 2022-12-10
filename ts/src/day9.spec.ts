@@ -23,7 +23,7 @@ const testInput2 = [
     "U 20"
 ]
 
-describe('part 1', () => {
+describe.skip('part 1', () => {
     it("should make Pos uniq", () => {
         const input = [
             toPosItem({ x: 1, y: 1 }),
@@ -60,7 +60,7 @@ describe('part 1', () => {
     });
 });
 
-describe("part2", () => {
+describe.skip("part2", () => {
     it("should return 1", () => {
         const result = day92(testInput)
         expect(result).toEqual(1)
