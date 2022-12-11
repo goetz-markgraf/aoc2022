@@ -114,9 +114,6 @@ export const day91 = (input: string[]) => {
 export const day92 = (input: string[]) => {
     const game = initGame10()
     forEach.indexed(input, (cmdLine, line) => {
-        if (line === 122) {
-            console.log("Debug");
-        }
         doStep10(game, cmdLine, line)
     })
     const uniqPosList = uniq(game.tailPosList)

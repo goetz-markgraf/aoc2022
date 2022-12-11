@@ -157,7 +157,7 @@ const testInput = [
     "noop"
 ]
 
-describe('part 1', () => {
+describe.skip('part 1', () => {
     it("should give easy test examples", () => {
         expect(day10_1(easyInput, 1)).toEqual(1)
         expect(day10_1(easyInput, 2)).toEqual(2)
@@ -177,7 +177,7 @@ describe('part 1', () => {
     });
 });
 
-describe('part 2', () => {
+describe.skip('part 2', () => {
     it("should return pattern", () => {
         const result = day10_2(testInput)
         expect(result[0]).toEqual("##..##..##..##..##..##..##..##..##..##..")

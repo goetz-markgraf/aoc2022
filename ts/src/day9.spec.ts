@@ -32,7 +32,7 @@ describe.skip('part 1', () => {
         ]
         expect(uniq(input)).toHaveLength(2)
     });
-    describe("should move tail correctly", () => {
+    describe.skip("should move tail correctly", () => {
         it("should not move", () => {
             const result = moveTail({ x: -1, y: 1 }, { x: 0, y: 0 })
             expect(result.x).toEqual(0)
