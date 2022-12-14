@@ -55,7 +55,7 @@ export const divideByAndRoundDown = (input: number, divisor: number = 3) =>
     Math.round((input / divisor) - 0.5)
 
 export const manageLevel = (currLevel: number, divider: number) =>
-    divider + (currLevel % divider)
+    (currLevel % divider)
 
 
 const doMonkey = (monkeyNumber: number, monkeys: Monkey[], reducer?: number) => {
