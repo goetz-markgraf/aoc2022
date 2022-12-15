@@ -26,7 +26,7 @@ const testInput =
     "[1,[2,[3,[4,[5,6,7]]]],8,9]\n" +
     "[1,[2,[3,[4,[5,6,0]]]],8,9]\n"
 
-describe('compare tests', () => {
+describe.skip('compare tests', () => {
     it("should do simple compares", () => {
         expect(compare(1, 2)).toBeTruthy()
         expect(compare(2, 1)).toBeFalsy()
@@ -47,7 +47,7 @@ describe('compare tests', () => {
     });
 });
 
-describe('part 1', () => {
+describe.skip('part 1', () => {
     it("should return 13", () => {
         const result = day13_1(testInput)
         expect(result).toEqual(13)
@@ -59,7 +59,7 @@ describe('part 1', () => {
     });
 });
 
-describe('part 2', () => {
+describe.skip('part 2', () => {
     it("should return 140", () => {
         const result = day13_2(testInput)
         expect(result).toEqual(140)

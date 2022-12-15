@@ -13,7 +13,7 @@ const simpleInput = [
     "SbcdefghijklmnopqrstuvwxyE"
 ]
 
-describe('helper tests', () => {
+describe.skip('helper tests', () => {
     const matrix = createMatrix(testInput)
 
     it("should create a number matrix", () => {
@@ -60,7 +60,7 @@ describe('helper tests', () => {
     });
 });
 
-describe('part 1', () => {
+describe.skip('part 1', () => {
     it("should return 31", () => {
         const result = day12_1(testInput)
         expect(result).toEqual(31)

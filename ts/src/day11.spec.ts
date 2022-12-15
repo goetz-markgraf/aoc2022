@@ -39,7 +39,7 @@ it("should divide and round", () => {
 });
 
 
-describe('part 1', () => {
+describe.skip('part 1', () => {
     it("should return 10605", () => {
         const result = day11_1(testInput)
         expect(result).toEqual(10605)
@@ -51,7 +51,7 @@ describe('part 1', () => {
     });
 });
 
-describe('part 2', () => {
+describe.skip('part 2', () => {
     it("should play one round", () => {
         const result = day11_2(testInput, 1)
         expect(result).toEqual(24)

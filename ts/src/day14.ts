@@ -1,6 +1,6 @@
 import { Pos } from "./day12";
 import { isEqual } from "lodash";
-import { find } from "remeda";
+import { range } from "remeda";
 
 export enum Orientation {
     HORIZONTAL, VERTICAL
@@ -22,6 +22,8 @@ export const makePos = (coordinateString: string): Pos => {
     const cStrings = coordinateString.split(",")
     return { x: parseInt(cStrings[0]), y: parseInt(cStrings[1]) }
 }
+
+export type Matrix = number[][]
 
 export const convertToLines = (line: string): Line[] => {
     const coordinateStrings = line.split("->").map(s => s.trim())
@@ -59,51 +61,59 @@ export const makeStore = (lines: Line[]): LineStore => ({
     vertical: lines.filter(line => line.orientation === Orientation.VERTICAL)
 })
 
-export const hitsLine = (pos: Pos, store: LineStore): boolean => {
-    const hLines = store.horizontal.filter(line => line.fix === pos.y)
-    const vLines = store.vertical.filter(line => line.fix === pos.x)
-    if (hLines.length === 0 && vLines.length === 0) return false
-
-    let ret = false
-    hLines.forEach(line => {
-        if (pos.x >= line.start && pos.x <= line.end)
-            ret = true
-    })
-    vLines.forEach(line => {
-        if (pos.y >= line.start && pos.y <= line.end)
-            ret = true
-    })
-    return ret
-}
-
-export const hitsSand = (pos: Pos, sandStore: Pos[]) =>
-    find(sandStore, sPos => isEqual(pos, sPos)) !== undefined
-
-
-export const findLowestPoint = (store: LineStore) => {
+export const findBorders = (store: LineStore): [ number, number, number ] => {
     let deep = 0
+    let left = Infinity
+    let right = -Infinity
     store.horizontal.forEach(line => {
         if (line.fix > deep) deep = line.fix
+        if (line.start < left) left = line.start
+        if (line.end > right) right = line.end
     })
     store.vertical.forEach(line => {
         if (line.end > deep) deep = line.end
+        if (line.fix < left) left = line.fix
+        if (line.fix > right) right = line.fix
     })
-    return deep
+    return [ deep, left, right ]
 }
 
-export const hitsAny = (pos: Pos, store: LineStore, sandStore: Pos[], lowestPoint: number) =>
-    pos.y === lowestPoint + 2 || hitsLine(pos, store) || hitsSand(pos, sandStore)
+export const createMatrix = ([ bottom, left, right ]: [ number, number, number ]): Matrix => {
+    let rightMost = Math.max(right, 500 + bottom) + 2
+    return range(0, bottom + 2).map(_ => range(0, rightMost + 1).map(_ => 0))
+}
 
-export const letFall = (store: LineStore, sandStore: Pos[], lowestPoint: number, rock: boolean = false) => {
+export const fillLineInMatrix = (matrix: Matrix) => (line: Line) => {
+    if (line.orientation === Orientation.HORIZONTAL) {
+        for (let x = line.start; x <= line.end; x++) {
+            matrix[line.fix][x] = 1
+        }
+    } else {
+        for (let y = line.start; y <= line.end; y++) {
+            matrix[y][line.fix] = 1
+        }
+    }
+}
+
+export const fillStoreInMatrix = (matrix: Matrix, store: LineStore) => {
+    store.horizontal.forEach(line => fillLineInMatrix(matrix)(line))
+    store.vertical.forEach(line => fillLineInMatrix(matrix)(line))
+}
+
+export const hitsAny = (pos: Pos, matrix: Matrix, bottom: number) =>
+    pos.y === (bottom + 2) || (matrix[pos.y][pos.x] !== 0)
+
+
+export const letFall = (matrix: Matrix, bottom: number, rock: boolean = false) => {
     let pos = { x: 500, y: 0 }
-    if (hitsAny(pos, store, sandStore, lowestPoint))
+    if (hitsAny(pos, matrix, bottom))
         return pos
 
     let stop = false
-    while (!stop && (rock || pos.y <= lowestPoint)) {
-        if (hitsAny({ x: pos.x, y: pos.y + 1 }, store, sandStore, lowestPoint)) {
-            if (hitsAny({ x: pos.x - 1, y: pos.y + 1 }, store, sandStore, lowestPoint)) {
-                if (hitsAny({ x: pos.x + 1, y: pos.y + 1 }, store, sandStore, lowestPoint)) {
+    while (!stop && (rock || pos.y <= bottom)) {
+        if (hitsAny({ x: pos.x, y: pos.y + 1 }, matrix, bottom)) {
+            if (hitsAny({ x: pos.x - 1, y: pos.y + 1 }, matrix, bottom)) {
+                if (hitsAny({ x: pos.x + 1, y: pos.y + 1 }, matrix, bottom)) {
                     stop = true
                 } else
                     pos = { x: pos.x + 1, y: pos.y + 1 }
@@ -120,38 +130,43 @@ export const letFall = (store: LineStore, sandStore: Pos[], lowestPoint: number,
 export const day14_1 = (input: string[]) => {
     const lines: Line[] = input.flatMap(convertToLines)
     const store = makeStore(lines)
-    const lowestPoint = findLowestPoint(store)
+    const [ bottom, left, right ] = findBorders(store)
+    const matrix = createMatrix([ bottom, left, right ])
+    fillStoreInMatrix(matrix, store)
 
-    const sandStore: Pos[] = []
     let lowest = false
+    let count = 0
     while (!lowest) {
-        const sandPos = letFall(store, sandStore, lowestPoint)
-        if (sandPos.y > lowestPoint)
+        const sandPos = letFall(matrix, bottom)
+        if (sandPos.y > bottom)
             lowest = true
-        else
-            sandStore.push(sandPos)
+        else {
+            matrix[sandPos.y][sandPos.x] = 2
+            count++
+        }
     }
 
-    return sandStore.length
+    return count
 }
 
 export const day14_2 = (input: string[]) => {
     const lines: Line[] = input.flatMap(convertToLines)
     const store = makeStore(lines)
-    const lowestPoint = findLowestPoint(store)
+    const [ bottom, left, right ] = findBorders(store)
+    const matrix = createMatrix([ bottom, left, right ])
+    fillStoreInMatrix(matrix, store)
 
-    const sandStore: Pos[] = []
     let full = false
+    let count = 0
     while (!full) {
-        const sandPos = letFall(store, sandStore, lowestPoint)
+        const sandPos = letFall(matrix, bottom)
         if (isEqual(sandPos, { x: 500, y: 0 }))
             full = true
+        else
+            matrix[sandPos.y][sandPos.x] = 2
 
-        sandStore.push(sandPos)
-
-        if (sandStore.length % 50 === 0)
-            console.log(`count: ${ sandStore.length } – x:${ sandPos.x }, y:${ sandPos.y }`);
+        count++
     }
 
-    return sandStore.length
+    return count
 }

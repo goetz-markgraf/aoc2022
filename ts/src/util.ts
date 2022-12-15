@@ -10,7 +10,7 @@ export const readLines = (filename: string): string[] => {
 }
 
 export const readText = (filename: string): string => {
-    const pathName = "../input/" + filename
+    const pathName = "../input_hidden/" + filename
 
     return fs.readFileSync(pathName).toString("utf-8")
 
