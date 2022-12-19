@@ -18,7 +18,7 @@ const testInput = [
     "10000"
 ]
 
-describe.skip('day 1 1', () => {
+describe('day 1 1', () => {
     it("should return 24000 for test input", () => {
         const result = day11(testInput)
         expect(result).toEqual(24000)
@@ -31,7 +31,7 @@ describe.skip('day 1 1', () => {
     });
 });
 
-describe.skip('day 1 2', () => {
+describe('day 1 2', () => {
     it("should return 45000 for test input", () => {
         const result = day12(testInput)
         expect(result).toEqual(45000)

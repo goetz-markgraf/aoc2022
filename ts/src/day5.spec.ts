@@ -13,7 +13,7 @@ const testInput = [
     "move 1 from 1 to 2"
 ]
 
-describe.skip('part 1', () => {
+describe('part 1', () => {
     it("should return CMZ", () => {
         const result = day51(testInput)
         expect(result).toEqual("CMZ")
@@ -25,7 +25,7 @@ describe.skip('part 1', () => {
     });
 });
 
-describe.skip('part 2', () => {
+describe('part 2', () => {
     it("should return CMZ", () => {
         const result = day52(testInput)
         expect(result).toEqual("MCD")

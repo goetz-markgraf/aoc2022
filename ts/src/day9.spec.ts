@@ -23,7 +23,7 @@ const testInput2 = [
     "U 20"
 ]
 
-describe.skip('part 1', () => {
+describe('part 1', () => {
     it("should make Pos uniq", () => {
         const input = [
             toPosItem({ x: 1, y: 1 }),
@@ -32,7 +32,7 @@ describe.skip('part 1', () => {
         ]
         expect(uniq(input)).toHaveLength(2)
     });
-    describe.skip("should move tail correctly", () => {
+    describe("should move tail correctly", () => {
         it("should not move", () => {
             const result = moveTail({ x: -1, y: 1 }, { x: 0, y: 0 })
             expect(result.x).toEqual(0)
@@ -60,7 +60,7 @@ describe.skip('part 1', () => {
     });
 });
 
-describe.skip("part2", () => {
+describe("part2", () => {
     it("should return 1", () => {
         const result = day92(testInput)
         expect(result).toEqual(1)

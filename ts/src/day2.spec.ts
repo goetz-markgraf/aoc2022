@@ -14,7 +14,7 @@ const testInput = [
 // Y Paper  2   draw
 // Z Scissors   3   win
 
-describe.skip('day 2 1', () => {
+describe('day 2 1', () => {
     it("should be 15 for testInput", () => {
         const result = day21(testInput)
         expect(result).toEqual(15)
@@ -27,7 +27,7 @@ describe.skip('day 2 1', () => {
     });
 });
 
-describe.skip('day 2 2', () => {
+describe('day 2 2', () => {
     it("should be 15 for testInput", () => {
         const result = day22(testInput)
         expect(result).toEqual(12)

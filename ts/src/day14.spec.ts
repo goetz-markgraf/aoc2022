@@ -16,7 +16,7 @@ const testInput = [
     "503,4 -> 502,4 -> 502,9 -> 494,9"
 ]
 
-describe.skip('test functions', () => {
+describe('test functions', () => {
     const lines = testInput.flatMap(convertToLines)
     const store = makeStore(lines)
 
@@ -63,7 +63,7 @@ describe.skip('test functions', () => {
     });
 });
 
-describe.skip('part 1', () => {
+describe('part 1', () => {
     it("should return 24", () => {
         const result = day14_1(testInput)
         expect(result).toEqual(24)
@@ -75,7 +75,7 @@ describe.skip('part 1', () => {
     });
 });
 
-describe.skip('part 2', () => {
+describe('part 2', () => {
     it("should return 93", () => {
         const result = day14_2(testInput)
         expect(result).toEqual(93)

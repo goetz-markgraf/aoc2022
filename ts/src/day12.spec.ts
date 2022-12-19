@@ -1,4 +1,4 @@
-import { createMatrix, day12_1, findField, findPaths, fits, heightValue, isInPath, Path } from "./day12";
+import { createMatrix, day12_1, day12_2, findField, findPaths, fits, heightValue, isInPath, Path } from "./day12";
 import { readLines } from "./util";
 
 const testInput = [
@@ -13,7 +13,7 @@ const simpleInput = [
     "SbcdefghijklmnopqrstuvwxyE"
 ]
 
-describe.skip('helper tests', () => {
+describe('helper tests', () => {
     const matrix = createMatrix(testInput)
 
     it("should create a number matrix", () => {
@@ -60,7 +60,7 @@ describe.skip('helper tests', () => {
     });
 });
 
-describe.skip('part 1', () => {
+describe('part 1', () => {
     it("should return 31", () => {
         const result = day12_1(testInput)
         expect(result).toEqual(31)
@@ -69,9 +69,23 @@ describe.skip('part 1', () => {
         const result = day12_1(simpleInput)
         expect(result).toEqual(25)
     });
-    it("should do the real thing", () => {
+    it.skip("should do the real thing", () => {
+        // attention, it takes about 1,25 hours
         const input = readLines("day12.input")
         const result = day12_1(input)
-        expect(result).toEqual(0)
+        expect(result).toEqual(412)
+    });
+});
+
+describe('part 2', () => {
+    it("should return 29", () => {
+        // attention, it takes about 22 minutes
+        const result = day12_2(testInput)
+        expect(result).toEqual(29)
+    });
+    it.skip("should do the real thing", () => {
+        const input = readLines("day12.input")
+        const result = day12_2(input)
+        expect(result).toEqual(402)
     });
 });

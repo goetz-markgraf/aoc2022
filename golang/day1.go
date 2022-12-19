@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-var testInput = []string{"1000", "2000", "3000", "", "4000", "", "5000", "6000", "", "7000", "8000", "9000", "", "10000"}
+var testInput1 = []string{"1000", "2000", "3000", "", "4000", "", "5000", "6000", "", "7000", "8000", "9000", "", "10000"}
 
 func day1() {
 	fmt.Println("**** Day 1")
@@ -19,7 +19,7 @@ func day1() {
 }
 
 func day1_1() {
-	testResult := produceResult1(testInput)
+	testResult := produceResult1(testInput1)
 	fmt.Printf("Test: %v\n", testResult)
 
 	input := readLines("day1.input")
@@ -28,7 +28,7 @@ func day1_1() {
 }
 
 func day1_2() {
-	testResult := produceResult2(testInput)
+	testResult := produceResult2(testInput1)
 	fmt.Printf("Test: %v\n", testResult)
 
 	input := readLines("day1.input")

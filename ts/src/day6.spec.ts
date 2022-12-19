@@ -1,7 +1,7 @@
 import { day61, day62 } from "./day6";
 import { readLines } from "./util";
 
-describe.skip('part 1', () => {
+describe('part 1', () => {
     it("should master the examples", () => {
         expect(day61("mjqjpqmgbljsphdztnvjfqwrcgsmlb")).toEqual(7)
         expect(day61("bvwbjplbgvbhsrlpgdmjqwftvncz")).toEqual(5)
@@ -15,7 +15,7 @@ describe.skip('part 1', () => {
     });
 });
 
-describe.skip('part 2', () => {
+describe('part 2', () => {
     it("should master the examples", () => {
         expect(day62("mjqjpqmgbljsphdztnvjfqwrcgsmlb")).toEqual(19)
         expect(day62("bvwbjplbgvbhsrlpgdmjqwftvncz")).toEqual(23)

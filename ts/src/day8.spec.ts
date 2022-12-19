@@ -9,7 +9,7 @@ const testInput = [
     "35390"
 ]
 
-describe.skip('part 1', () => {
+describe('part 1', () => {
     it("should return 21", () => {
         const result = day81(testInput)
         expect(result).toEqual(21)
@@ -21,7 +21,7 @@ describe.skip('part 1', () => {
     });
 });
 
-describe.skip('part 2', () => {
+describe('part 2', () => {
     it("should calculate tests", () => {
         const field = toField(testInput)
         expect(calcSenicScore(field, 2, 1)).toEqual(4)

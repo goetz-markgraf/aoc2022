@@ -7,12 +7,16 @@ import (
 )
 
 func readLines(filename string) []string {
-	fileContent, err := ioutil.ReadFile("../input/" + filename)
+	fileContent, err := ioutil.ReadFile("../input_hidden/" + filename)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	text := string(fileContent)
 	lines := strings.Split(text, "\n")
-	return lines
+	if strings.TrimSpace(lines[len(lines)-1]) == "" {
+		return lines[0 : len(lines)-1]
+	} else {
+		return lines
+	}
 }

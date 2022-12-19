@@ -16,13 +16,12 @@ export const createMatrix = (input: string[]): Matrix =>
 export const findField = (matrix: Matrix, content: string): Pos => {
     const ret: Pos = { x: -1, y: -1 }
 
-    const y = findIndex(matrix, line => {
+    ret.y = findIndex(matrix, line => {
             const x = findIndex(line, ch => ch === content)
             if (x >= 0) ret.x = x
             return x >= 0
         }
     )
-    ret.y = y
 
     return ret
 }
@@ -52,7 +51,7 @@ export const isInPath = (path: Path, pos: Pos) => {
     return false
 }
 
-export const findPaths = (matrix: Matrix, path: Path): Path[] => {
+export const findPaths = (matrix: Matrix, path: Path, downwards: boolean = false): Path[] => {
     const lastPos = path[path.length - 1]
 
     const newPossiblePos: Pos[] = []
@@ -63,10 +62,13 @@ export const findPaths = (matrix: Matrix, path: Path): Path[] => {
 
     return pipe(
         newPossiblePos,
-        map(pos =>
-            fits(heightValue(matrix, lastPos), heightValue(matrix, pos))
-                ? pos
-                : undefined
+        map(pos => {
+                const lower = downwards ? pos : lastPos
+                const higher = downwards ? lastPos : pos
+                return fits(heightValue(matrix, lower), heightValue(matrix, higher))
+                    ? pos
+                    : undefined
+            }
         ),
         filter(pos => pos !== undefined),
         filter(pos => !isInPath(path, pos!)),
@@ -102,6 +104,7 @@ export const day12_1 = (input: string[]) => {
     const startPos = findField(matrix, "S")
     const endPos = findField(matrix, "E")
     let paths: Path[] = [ [ startPos ] ]
+    let counter = 0
     while (paths.length > 0) {
         paths = sortBy(paths, p => p.length - heightValue(matrix, p[p.length - 1]).charCodeAt(0))
         const firstPath = paths.shift()!
@@ -111,6 +114,33 @@ export const day12_1 = (input: string[]) => {
         const newPaths = findPaths(matrix, firstPath)
         paths = concat(paths, newPaths)
         paths = cleanUpPaths(paths)
+        counter++
+        if (counter % 50 === 0)
+            console.log(`Counter: ${ counter } – length shortest path: ${ firstPath.length }`);
+    }
+
+    return -1
+}
+
+export const day12_2 = (input: string[]) => {
+    const matrix = createMatrix(input)
+    const startPos = findField(matrix, "E")
+    let paths: Path[] = [ [ startPos ] ]
+    let counter = 0
+    while (paths.length > 0) {
+        paths = sortBy(paths, p => p.length - heightValue(matrix, p[p.length - 1]).charCodeAt(0))
+        const firstPath = paths.shift()!
+
+        if (heightValue(matrix, firstPath[firstPath.length - 1]) === "a") {
+            return firstPath.length - 1
+        }
+
+        const newPaths = findPaths(matrix, firstPath, true)
+        paths = concat(paths, newPaths)
+        paths = cleanUpPaths(paths)
+        counter++
+        if (counter % 50 === 0)
+            console.log(`Counter: ${ counter } – length shortest path: ${ firstPath.length } to ${ heightValue(matrix, firstPath[firstPath.length - 1]) }`);
     }
 
     return -1
