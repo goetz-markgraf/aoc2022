@@ -69,13 +69,32 @@ func adjacent(q1 Pos3D, q2 Pos3D) bool {
 	return false
 }
 
+func noDuplicates(in []Pos3D) []Pos3D {
+	keys := make(map[Pos3D]bool)
+	var ret []Pos3D
+
+	for _, cube := range in {
+		if _, value := keys[cube]; !value {
+			keys[cube] = true
+			ret = append(ret, cube)
+		}
+	}
+
+	return ret
+}
+
 func day18_1(input []string) int {
 	amountCubes := len(input)
 	cubes := make([]Pos3D, 0)
+
 	for i := 0; i < amountCubes; i++ {
 		newCube := createPos(input[i])
 		cubes = append(cubes, newCube)
 	}
+
+	cubes = noDuplicates(cubes)
+	amountCubes = len(cubes)
+
 	sides := amountCubes * 6
 
 	for i := 0; i < amountCubes; i++ {
